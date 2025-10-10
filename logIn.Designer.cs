@@ -1,6 +1,6 @@
 ﻿namespace assignment2
 {
-    partial class Form1
+    partial class logInScreen
     {
         /// <summary>
         ///  Required designer variable.
@@ -56,7 +56,7 @@
             logInButton.TabIndex = 1;
             logInButton.Text = "Log In";
             logInButton.UseVisualStyleBackColor = true;
-            logInButton.Click += button1_Click;
+            logInButton.Click += this.logIn_Click;
             // 
             // usernameField
             // 
@@ -102,7 +102,7 @@
             passwordLabel.TabIndex = 6;
             passwordLabel.Text = "Password:";
             // 
-            // Form1
+            // logInScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -114,8 +114,8 @@
             Controls.Add(usernameField);
             Controls.Add(logInButton);
             Controls.Add(logInTitle);
-            Name = "Form1";
-            Text = "Form1";
+            Name = "logInScreen";
+            Text = "Task Manager";
             ResumeLayout(false);
             PerformLayout();
         }
