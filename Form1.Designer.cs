@@ -28,26 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
+            logInTitle = new Label();
+            logInButton = new Button();
+            usernameField = new TextBox();
+            passwordField = new TextBox();
+            signUpButton = new Button();
+            usernameLabel = new Label();
+            passwordLabel = new Label();
             SuspendLayout();
             // 
-            // label1
+            // logInTitle
             // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 20F);
-            label1.Location = new Point(276, 55);
-            label1.Name = "label1";
-            label1.Size = new Size(213, 46);
-            label1.TabIndex = 0;
-            label1.Text = "Login Screen";
-            label1.TextAlign = ContentAlignment.TopCenter;
+            logInTitle.AutoSize = true;
+            logInTitle.Font = new Font("Segoe UI", 20F);
+            logInTitle.Location = new Point(276, 55);
+            logInTitle.Name = "logInTitle";
+            logInTitle.Size = new Size(213, 46);
+            logInTitle.TabIndex = 0;
+            logInTitle.Text = "Login Screen";
+            logInTitle.TextAlign = ContentAlignment.TopCenter;
+            // 
+            // logInButton
+            // 
+            logInButton.Location = new Point(276, 299);
+            logInButton.Name = "logInButton";
+            logInButton.Size = new Size(94, 29);
+            logInButton.TabIndex = 1;
+            logInButton.Text = "Log In";
+            logInButton.UseVisualStyleBackColor = true;
+            logInButton.Click += button1_Click;
+            // 
+            // usernameField
+            // 
+            usernameField.Location = new Point(342, 169);
+            usernameField.Name = "usernameField";
+            usernameField.Size = new Size(201, 27);
+            usernameField.TabIndex = 2;
+            usernameField.TextChanged += textBox1_TextChanged;
+            // 
+            // passwordField
+            // 
+            passwordField.Location = new Point(342, 220);
+            passwordField.Name = "passwordField";
+            passwordField.PasswordChar = '*';
+            passwordField.Size = new Size(201, 27);
+            passwordField.TabIndex = 3;
+            // 
+            // signUpButton
+            // 
+            signUpButton.Location = new Point(383, 299);
+            signUpButton.Name = "signUpButton";
+            signUpButton.Size = new Size(94, 29);
+            signUpButton.TabIndex = 4;
+            signUpButton.Text = "Sign Up";
+            signUpButton.UseVisualStyleBackColor = true;
+            // 
+            // usernameLabel
+            // 
+            usernameLabel.AutoSize = true;
+            usernameLabel.Location = new Point(258, 176);
+            usernameLabel.Name = "usernameLabel";
+            usernameLabel.Size = new Size(78, 20);
+            usernameLabel.TabIndex = 5;
+            usernameLabel.Text = "Username:";
+            usernameLabel.Click += label1_Click;
+            // 
+            // passwordLabel
+            // 
+            passwordLabel.AutoSize = true;
+            passwordLabel.Location = new Point(258, 223);
+            passwordLabel.Name = "passwordLabel";
+            passwordLabel.Size = new Size(73, 20);
+            passwordLabel.TabIndex = 6;
+            passwordLabel.Text = "Password:";
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(label1);
+            Controls.Add(passwordLabel);
+            Controls.Add(usernameLabel);
+            Controls.Add(signUpButton);
+            Controls.Add(passwordField);
+            Controls.Add(usernameField);
+            Controls.Add(logInButton);
+            Controls.Add(logInTitle);
             Name = "Form1";
             Text = "Form1";
             ResumeLayout(false);
@@ -56,6 +122,12 @@
 
         #endregion
 
-        private Label label1;
+        private Label logInTitle;
+        private Button logInButton;
+        private TextBox usernameField;
+        private TextBox passwordField;
+        private Button signUpButton;
+        private Label usernameLabel;
+        private Label passwordLabel;
     }
 }
