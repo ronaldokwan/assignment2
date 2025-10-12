@@ -56,7 +56,7 @@
             logInButton.TabIndex = 1;
             logInButton.Text = "Log In";
             logInButton.UseVisualStyleBackColor = true;
-            logInButton.Click += this.logIn_Click;
+            logInButton.Click += logIn_Click;
             // 
             // usernameField
             // 
@@ -82,6 +82,7 @@
             signUpButton.TabIndex = 4;
             signUpButton.Text = "Sign Up";
             signUpButton.UseVisualStyleBackColor = true;
+            signUpButton.Click += signUpButton_Click;
             // 
             // usernameLabel
             // 

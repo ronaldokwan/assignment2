@@ -25,5 +25,12 @@ namespace assignment2
         {
 
         }
+
+        private void signUpButton_Click(object sender, EventArgs e)
+        {
+            var signUp = new signUp();
+            signUp.Show();
+            this.Hide();
+        }
     }
 }
