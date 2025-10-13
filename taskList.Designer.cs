@@ -9,6 +9,8 @@
         private Button editTaskButton;
         private Button deleteTaskButton;
         private Button viewHistoryButton;
+        private Button markAsDoneButton;
+        private Button signOutButton;
 
         protected override void Dispose(bool disposing)
         {
@@ -24,6 +26,8 @@
             editTaskButton = new Button();
             deleteTaskButton = new Button();
             viewHistoryButton = new Button();
+            markAsDoneButton = new Button();
+            signOutButton = new Button();
             SuspendLayout();
 
             // ================================
@@ -100,6 +104,30 @@
             viewHistoryButton.Click += viewHistoryButton_Click;
 
             // ================================
+            // BUTTON: MARK AS DONE
+            // ================================
+            markAsDoneButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            markAsDoneButton.Text = "Mark as Done";
+            markAsDoneButton.Location = new Point(50, 500);
+            markAsDoneButton.Size = new Size(150, 45);
+            markAsDoneButton.BackColor = Color.FromArgb(0, 204, 102);
+            markAsDoneButton.ForeColor = Color.White;
+            markAsDoneButton.FlatStyle = FlatStyle.Flat;
+            markAsDoneButton.Click += markAsDoneButton_Click;
+
+            // ================================
+            // BUTTON: SIGN OUT
+            // ================================
+            signOutButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            signOutButton.Text = "Sign Out";
+            signOutButton.Location = new Point(700, 500);
+            signOutButton.Size = new Size(150, 45);
+            signOutButton.BackColor = Color.Gray;
+            signOutButton.ForeColor = Color.White;
+            signOutButton.FlatStyle = FlatStyle.Flat;
+            signOutButton.Click += signOutButton_Click;
+
+            // ================================
             // ADD CONTROLS
             // ================================
             Controls.Add(labelTasks);
@@ -108,6 +136,8 @@
             Controls.Add(editTaskButton);
             Controls.Add(deleteTaskButton);
             Controls.Add(viewHistoryButton);
+            Controls.Add(markAsDoneButton);
+            Controls.Add(signOutButton);
 
             ResumeLayout(false);
             PerformLayout();

@@ -28,9 +28,6 @@
             manageTasksButton = new Button();
             SuspendLayout();
 
-            // ================================
-            // FORM SETTINGS
-            // ================================
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(900, 600);
@@ -38,24 +35,15 @@
             Text = "Admin Panel";
             BackColor = Color.WhiteSmoke;
 
-            // ================================
-            // LABEL: EXISTING USERS
-            // ================================
             labelUsers.AutoSize = true;
             labelUsers.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelUsers.Location = new Point(40, 40);
             labelUsers.Text = "Existing Users:";
 
-            // ================================
-            // LISTBOX: USERS
-            // ================================
             listBoxUsers.Font = new Font("Segoe UI", 11F);
             listBoxUsers.Location = new Point(40, 80);
             listBoxUsers.Size = new Size(350, 420);
 
-            // ================================
-            // TEXTBOX: NEW USER
-            // ================================
             textBoxNewUser.Font = new Font("Segoe UI", 11F);
             textBoxNewUser.PlaceholderText = "Username";
             textBoxNewUser.Location = new Point(420, 100);
@@ -72,9 +60,6 @@
             comboBoxRole.Size = new Size(250, 35);
             comboBoxRole.SelectedIndex = 1;
 
-            // ================================
-            // BUTTONS
-            // ================================
             createUserButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             createUserButton.Location = new Point(420, 260);
             createUserButton.Size = new Size(150, 45);
@@ -93,9 +78,6 @@
             manageTasksButton.FlatStyle = FlatStyle.Flat;
             manageTasksButton.Click += manageTasksButton_Click;
 
-            // ================================
-            // ADD CONTROLS
-            // ================================
             Controls.Add(labelUsers);
             Controls.Add(listBoxUsers);
             Controls.Add(textBoxNewUser);

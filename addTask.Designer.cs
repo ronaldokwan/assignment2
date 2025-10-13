@@ -5,9 +5,9 @@
         private System.ComponentModel.IContainer components = null;
         private Label labelTitle;
         private TextBox taskTitle;
-        private Label labelDesc;
+        private Label labelDescription;
         private TextBox taskDescription;
-        private Label labelAssign;
+        private Label labelAssignUser;
         private ComboBox comboBoxAssignUser;
         private Button saveTaskButton;
 
@@ -21,9 +21,9 @@
         {
             labelTitle = new Label();
             taskTitle = new TextBox();
-            labelDesc = new Label();
+            labelDescription = new Label();
             taskDescription = new TextBox();
-            labelAssign = new Label();
+            labelAssignUser = new Label();
             comboBoxAssignUser = new ComboBox();
             saveTaskButton = new Button();
             SuspendLayout();
@@ -39,7 +39,7 @@
             BackColor = System.Drawing.Color.WhiteSmoke;
 
             // ================================
-            // LABEL: TITLE
+            // LABEL: TASK TITLE
             // ================================
             labelTitle.AutoSize = true;
             labelTitle.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
@@ -47,7 +47,7 @@
             labelTitle.Text = "Task Title:";
 
             // ================================
-            // TEXTBOX: TITLE
+            // TEXTBOX: TASK TITLE
             // ================================
             taskTitle.Font = new Font("Segoe UI", 11F);
             taskTitle.Location = new Point(180, 35);
@@ -56,10 +56,10 @@
             // ================================
             // LABEL: DESCRIPTION
             // ================================
-            labelDesc.AutoSize = true;
-            labelDesc.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelDesc.Location = new Point(50, 100);
-            labelDesc.Text = "Description:";
+            labelDescription.AutoSize = true;
+            labelDescription.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            labelDescription.Location = new Point(50, 100);
+            labelDescription.Text = "Description:";
 
             // ================================
             // TEXTBOX: DESCRIPTION
@@ -73,10 +73,10 @@
             // ================================
             // LABEL: ASSIGN USER
             // ================================
-            labelAssign.AutoSize = true;
-            labelAssign.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
-            labelAssign.Location = new Point(50, 470);
-            labelAssign.Text = "Assign To:";
+            labelAssignUser.AutoSize = true;
+            labelAssignUser.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            labelAssignUser.Location = new Point(50, 470);
+            labelAssignUser.Text = "Assign To:";
 
             // ================================
             // COMBOBOX: ASSIGN USER
@@ -90,11 +90,11 @@
             // ================================
             saveTaskButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             saveTaskButton.Text = "Save";
-            saveTaskButton.Location = new Point(710, 465);
-            saveTaskButton.Size = new Size(120, 45);
-            saveTaskButton.BackColor = System.Drawing.Color.FromArgb(0, 204, 102);
+            saveTaskButton.BackColor = Color.FromArgb(0, 204, 102);
             saveTaskButton.ForeColor = Color.White;
             saveTaskButton.FlatStyle = FlatStyle.Flat;
+            saveTaskButton.Location = new Point(710, 465);
+            saveTaskButton.Size = new Size(120, 45);
             saveTaskButton.Click += saveTaskButton_Click;
 
             // ================================
@@ -102,9 +102,9 @@
             // ================================
             Controls.Add(labelTitle);
             Controls.Add(taskTitle);
-            Controls.Add(labelDesc);
+            Controls.Add(labelDescription);
             Controls.Add(taskDescription);
-            Controls.Add(labelAssign);
+            Controls.Add(labelAssignUser);
             Controls.Add(comboBoxAssignUser);
             Controls.Add(saveTaskButton);
 

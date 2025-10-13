@@ -9,7 +9,7 @@ namespace assignment2
     {
         private readonly string currentUser;
         private readonly string taskFile = "tasks.txt";
-        private readonly string editingTaskTitle; // null if creating new
+        private readonly string editingTaskTitle;
 
         public AddTask(string user, string taskTitleToEdit = null)
         {
@@ -24,6 +24,7 @@ namespace assignment2
         {
             comboBoxAssignUser.Items.Clear();
             if (!File.Exists("database.txt")) return;
+
             foreach (var line in File.ReadAllLines("database.txt"))
             {
                 if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line)) continue;
@@ -46,40 +47,37 @@ namespace assignment2
         private void saveTaskButton_Click(object sender, EventArgs e)
         {
             string title = taskTitle.Text.Trim();
-            string desc = taskDescription.Text.Trim();
-            string assignedUser = comboBoxAssignUser.SelectedItem?.ToString() ?? currentUser;
+            string description = taskDescription.Text.Trim();
             string status = "ToDo";
+            string assignedUser = comboBoxAssignUser.SelectedItem?.ToString();
 
-            if (string.IsNullOrEmpty(title))
+            if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(assignedUser))
             {
-                MessageBox.Show("Task title is required.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            string historyEntry = $"{DateTime.Now}: {(editingTaskTitle == null ? $"Created by {currentUser}" : $"Edited by {currentUser}")}";
+            if (!File.Exists(taskFile)) File.WriteAllText(taskFile, "");
 
-            string[] lines = File.Exists(taskFile) ? File.ReadAllLines(taskFile) : Array.Empty<string>();
+            var lines = File.ReadAllLines(taskFile).ToList();
+
             if (editingTaskTitle != null)
             {
-                // Edit existing task
-                for (int i = 0; i < lines.Length; i++)
+                for (int i = 0; i < lines.Count; i++)
                 {
-                    var parts = lines[i].Split('|');
-                    if (parts[0] == editingTaskTitle)
+                    if (lines[i].Split('|')[0] == editingTaskTitle)
                     {
-                        string oldHistory = parts.Length >= 5 ? parts[4] : "";
-                        lines[i] = $"{title}|{desc}|{status}|{assignedUser}|{oldHistory};{historyEntry}";
+                        lines[i] = $"{title}|{description}|{status}|{assignedUser}";
                         break;
                     }
                 }
-                File.WriteAllLines(taskFile, lines);
             }
             else
             {
-                // New task
-                File.AppendAllText(taskFile, $"{title}|{desc}|{status}|{assignedUser}|{historyEntry}{Environment.NewLine}");
+                lines.Add($"{title}|{description}|{status}|{assignedUser}");
             }
 
+            File.WriteAllLines(taskFile, lines);
             MessageBox.Show("Task saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             Close();
         }

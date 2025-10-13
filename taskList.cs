@@ -15,6 +15,28 @@ namespace assignment2
             InitializeComponent();
             currentUser = user;
             LoadTasks();
+            ConfigureButtons();
+        }
+
+        private bool IsAdmin()
+        {
+            var userLine = File.ReadAllLines("database.txt")
+                .FirstOrDefault(l => l.Split('|')[0] == currentUser);
+            return userLine != null && userLine.Split('|')[2] == "admin";
+        }
+
+        private void ConfigureButtons()
+        {
+
+            bool isAdmin = IsAdmin();
+
+            // Hide Add, Edit, Delete buttons for non-admins
+            addTaskButton.Visible = isAdmin;
+            editTaskButton.Visible = isAdmin;
+            deleteTaskButton.Visible = isAdmin;
+
+            // Hide Sign Out button for admins
+            signOutButton.Visible = !isAdmin;
         }
 
         private void LoadTasks()
@@ -26,18 +48,12 @@ namespace assignment2
             {
                 var parts = line.Split('|');
                 string assignedUser = parts[3];
+                string status = parts[2];
                 if (assignedUser == currentUser || IsAdmin())
                 {
-                    listBoxTasks.Items.Add(parts[0] + " (" + assignedUser + ")");
+                    listBoxTasks.Items.Add($"{parts[0]} ({assignedUser}) - {status}");
                 }
             }
-        }
-
-        private bool IsAdmin()
-        {
-            var userLine = File.ReadAllLines("database.txt")
-                .FirstOrDefault(l => l.Split('|')[0] == currentUser);
-            return userLine != null && userLine.Split('|')[2] == "admin";
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
@@ -72,6 +88,42 @@ namespace assignment2
             if (taskLine == null) return;
             var history = taskLine.Split('|').Length >= 5 ? taskLine.Split('|')[4].Replace(";", Environment.NewLine) : "No history";
             MessageBox.Show(history, $"History of {title}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void markAsDoneButton_Click(object sender, EventArgs e)
+        {
+            if (listBoxTasks.SelectedItem == null) return;
+
+            string title = listBoxTasks.SelectedItem.ToString().Split('(')[0].Trim();
+            var lines = File.ReadAllLines(taskFile);
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+                var parts = lines[i].Split('|');
+                if (parts[0] == title)
+                {
+                    string assignedUser = parts[3];
+                    if (assignedUser != currentUser && !IsAdmin())
+                    {
+                        MessageBox.Show("You can only complete your own tasks.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
+                    string oldHistory = parts.Length >= 5 ? parts[4] : "";
+                    string historyEntry = $"{DateTime.Now}: Marked as Done by {currentUser}";
+                    lines[i] = $"{parts[0]}|{parts[1]}|Done|{assignedUser}|{oldHistory};{historyEntry}";
+                    break;
+                }
+            }
+
+            File.WriteAllLines(taskFile, lines);
+            LoadTasks();
+        }
+
+        private void signOutButton_Click(object sender, EventArgs e)
+        {
+            new LogInScreen().Show();
+            Close();
         }
     }
 }
