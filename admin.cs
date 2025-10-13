@@ -59,5 +59,11 @@ namespace assignment2
         {
             new TaskList(currentAdmin).Show();
         }
+
+        private void signOutButton_Click(object sender, EventArgs e)
+        {
+            new LogInScreen().Show();
+            Close();
+        }
     }
 }

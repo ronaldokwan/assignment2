@@ -10,6 +10,7 @@
         private ComboBox comboBoxRole;
         private Button createUserButton;
         private Button manageTasksButton;
+        private Button signOutButton;
 
         protected override void Dispose(bool disposing)
         {
@@ -19,6 +20,18 @@
 
         private void InitializeComponent()
         {
+            signOutButton = new Button();
+            signOutButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            signOutButton.Location = new Point(420, 400);
+            signOutButton.Size = new Size(150, 45);
+            signOutButton.Text = "Sign Out";
+            signOutButton.BackColor = Color.FromArgb(255, 51, 51);
+            signOutButton.ForeColor = Color.White;
+            signOutButton.FlatStyle = FlatStyle.Flat;
+            signOutButton.Click += signOutButton_Click;
+
+            Controls.Add(signOutButton);
+
             listBoxUsers = new ListBox();
             labelUsers = new Label();
             textBoxNewUser = new TextBox();

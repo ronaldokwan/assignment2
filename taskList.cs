@@ -27,15 +27,15 @@ namespace assignment2
 
         private void ConfigureButtons()
         {
-
             bool isAdmin = IsAdmin();
 
-            // Hide Add, Edit, Delete buttons for non-admins
+            // Admin: show Add/Edit/Delete, hide Mark as Done & Sign Out
             addTaskButton.Visible = isAdmin;
             editTaskButton.Visible = isAdmin;
             deleteTaskButton.Visible = isAdmin;
+            markAsDoneButton.Visible = !isAdmin;
 
-            // Hide Sign Out button for admins
+            // Sign Out only for normal users
             signOutButton.Visible = !isAdmin;
         }
 
