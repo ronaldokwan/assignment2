@@ -1,11 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 
 namespace assignment2
@@ -15,6 +9,13 @@ namespace assignment2
         public Archive()
         {
             InitializeComponent();
+            LoadArchive();
+        }
+
+        private void LoadArchive()
+        {
+            if (!File.Exists("archive.txt")) return;
+            listBoxArchive.Items.AddRange(File.ReadAllLines("archive.txt"));
         }
     }
 }

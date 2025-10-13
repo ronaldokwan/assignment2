@@ -1,57 +1,116 @@
 ﻿namespace assignment2
 {
-    partial class taskList
+    partial class TaskList
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private ListBox listBoxTasks;
+        private Label labelTasks;
+        private Button addTaskButton;
+        private Button editTaskButton;
+        private Button deleteTaskButton;
+        private Button viewHistoryButton;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            listBox1 = new ListBox();
+            listBoxTasks = new ListBox();
+            labelTasks = new Label();
+            addTaskButton = new Button();
+            editTaskButton = new Button();
+            deleteTaskButton = new Button();
+            viewHistoryButton = new Button();
             SuspendLayout();
-            // 
-            // listBox1
-            // 
-            listBox1.FormattingEnabled = true;
-            listBox1.Location = new Point(124, 116);
-            listBox1.Name = "listBox1";
-            listBox1.Size = new Size(498, 204);
-            listBox1.TabIndex = 0;
-            // 
-            // taskList
-            // 
+
+            // ================================
+            // FORM SETTINGS
+            // ================================
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(listBox1);
-            Name = "taskList";
-            Text = "Task Manager";
+            ClientSize = new Size(900, 600);
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Task List";
+            BackColor = System.Drawing.Color.WhiteSmoke;
+
+            // ================================
+            // LABEL: TASKS
+            // ================================
+            labelTasks.AutoSize = true;
+            labelTasks.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            labelTasks.Location = new Point(50, 30);
+            labelTasks.Text = "Your Tasks:";
+
+            // ================================
+            // LISTBOX: TASKS
+            // ================================
+            listBoxTasks.Font = new Font("Segoe UI", 11F);
+            listBoxTasks.Location = new Point(50, 70);
+            listBoxTasks.Size = new Size(700, 350);
+
+            // ================================
+            // BUTTON: ADD TASK
+            // ================================
+            addTaskButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            addTaskButton.Text = "Add Task";
+            addTaskButton.Location = new Point(50, 440);
+            addTaskButton.Size = new Size(150, 45);
+            addTaskButton.BackColor = Color.FromArgb(51, 153, 255);
+            addTaskButton.ForeColor = Color.White;
+            addTaskButton.FlatStyle = FlatStyle.Flat;
+            addTaskButton.Click += addTaskButton_Click;
+
+            // ================================
+            // BUTTON: EDIT TASK
+            // ================================
+            editTaskButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            editTaskButton.Text = "Edit Task";
+            editTaskButton.Location = new Point(230, 440);
+            editTaskButton.Size = new Size(150, 45);
+            editTaskButton.BackColor = Color.FromArgb(255, 204, 0);
+            editTaskButton.ForeColor = Color.White;
+            editTaskButton.FlatStyle = FlatStyle.Flat;
+            editTaskButton.Click += editTaskButton_Click;
+
+            // ================================
+            // BUTTON: DELETE TASK
+            // ================================
+            deleteTaskButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            deleteTaskButton.Text = "Delete Task";
+            deleteTaskButton.Location = new Point(410, 440);
+            deleteTaskButton.Size = new Size(150, 45);
+            deleteTaskButton.BackColor = Color.FromArgb(255, 77, 77);
+            deleteTaskButton.ForeColor = Color.White;
+            deleteTaskButton.FlatStyle = FlatStyle.Flat;
+            deleteTaskButton.Click += deleteTaskButton_Click;
+
+            // ================================
+            // BUTTON: VIEW HISTORY
+            // ================================
+            viewHistoryButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            viewHistoryButton.Text = "View History";
+            viewHistoryButton.Location = new Point(590, 440);
+            viewHistoryButton.Size = new Size(150, 45);
+            viewHistoryButton.BackColor = Color.FromArgb(102, 102, 255);
+            viewHistoryButton.ForeColor = Color.White;
+            viewHistoryButton.FlatStyle = FlatStyle.Flat;
+            viewHistoryButton.Click += viewHistoryButton_Click;
+
+            // ================================
+            // ADD CONTROLS
+            // ================================
+            Controls.Add(labelTasks);
+            Controls.Add(listBoxTasks);
+            Controls.Add(addTaskButton);
+            Controls.Add(editTaskButton);
+            Controls.Add(deleteTaskButton);
+            Controls.Add(viewHistoryButton);
+
             ResumeLayout(false);
+            PerformLayout();
         }
-
-        #endregion
-
-        private ListBox listBox1;
     }
 }

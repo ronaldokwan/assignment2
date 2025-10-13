@@ -1,39 +1,111 @@
 ﻿namespace assignment2
 {
-    partial class admin
+    partial class Admin
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private ListBox listBoxUsers;
+        private Label labelUsers;
+        private TextBox textBoxNewUser;
+        private TextBox textBoxNewPass;
+        private ComboBox comboBoxRole;
+        private Button createUserButton;
+        private Button manageTasksButton;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && components != null) components.Dispose();
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "admin";
-        }
+            listBoxUsers = new ListBox();
+            labelUsers = new Label();
+            textBoxNewUser = new TextBox();
+            textBoxNewPass = new TextBox();
+            comboBoxRole = new ComboBox();
+            createUserButton = new Button();
+            manageTasksButton = new Button();
+            SuspendLayout();
 
-        #endregion
+            // ================================
+            // FORM SETTINGS
+            // ================================
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(900, 600);
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Admin Panel";
+            BackColor = Color.WhiteSmoke;
+
+            // ================================
+            // LABEL: EXISTING USERS
+            // ================================
+            labelUsers.AutoSize = true;
+            labelUsers.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            labelUsers.Location = new Point(40, 40);
+            labelUsers.Text = "Existing Users:";
+
+            // ================================
+            // LISTBOX: USERS
+            // ================================
+            listBoxUsers.Font = new Font("Segoe UI", 11F);
+            listBoxUsers.Location = new Point(40, 80);
+            listBoxUsers.Size = new Size(350, 420);
+
+            // ================================
+            // TEXTBOX: NEW USER
+            // ================================
+            textBoxNewUser.Font = new Font("Segoe UI", 11F);
+            textBoxNewUser.PlaceholderText = "Username";
+            textBoxNewUser.Location = new Point(420, 100);
+            textBoxNewUser.Size = new Size(250, 35);
+
+            textBoxNewPass.Font = new Font("Segoe UI", 11F);
+            textBoxNewPass.PlaceholderText = "Password";
+            textBoxNewPass.Location = new Point(420, 150);
+            textBoxNewPass.Size = new Size(250, 35);
+
+            comboBoxRole.Font = new Font("Segoe UI", 11F);
+            comboBoxRole.Items.AddRange(new object[] { "admin", "user" });
+            comboBoxRole.Location = new Point(420, 200);
+            comboBoxRole.Size = new Size(250, 35);
+            comboBoxRole.SelectedIndex = 1;
+
+            // ================================
+            // BUTTONS
+            // ================================
+            createUserButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            createUserButton.Location = new Point(420, 260);
+            createUserButton.Size = new Size(150, 45);
+            createUserButton.Text = "Create User";
+            createUserButton.BackColor = Color.FromArgb(51, 153, 255);
+            createUserButton.ForeColor = Color.White;
+            createUserButton.FlatStyle = FlatStyle.Flat;
+            createUserButton.Click += createUserButton_Click;
+
+            manageTasksButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            manageTasksButton.Location = new Point(420, 330);
+            manageTasksButton.Size = new Size(150, 45);
+            manageTasksButton.Text = "Manage Tasks";
+            manageTasksButton.BackColor = Color.FromArgb(0, 204, 102);
+            manageTasksButton.ForeColor = Color.White;
+            manageTasksButton.FlatStyle = FlatStyle.Flat;
+            manageTasksButton.Click += manageTasksButton_Click;
+
+            // ================================
+            // ADD CONTROLS
+            // ================================
+            Controls.Add(labelUsers);
+            Controls.Add(listBoxUsers);
+            Controls.Add(textBoxNewUser);
+            Controls.Add(textBoxNewPass);
+            Controls.Add(comboBoxRole);
+            Controls.Add(createUserButton);
+            Controls.Add(manageTasksButton);
+
+            ResumeLayout(false);
+            PerformLayout();
+        }
     }
 }
