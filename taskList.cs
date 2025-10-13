@@ -51,7 +51,7 @@ namespace assignment2
                 string status = parts[2];
                 if (assignedUser == currentUser || IsAdmin())
                 {
-                    listBoxTasks.Items.Add($"{parts[0]} ({assignedUser}) - {status}");
+                    listBoxTasks.Items.Add($"(Title: {parts[0]} - Description: {parts[1]}) ({assignedUser}) - {status}");
                 }
             }
         }
