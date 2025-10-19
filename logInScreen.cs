@@ -9,7 +9,6 @@ namespace assignment2
     {
         private readonly IUserRepository userRepository;
 
-        // Constructor with DI
         public LogInScreen(IUserRepository userRepo)
         {
             InitializeComponent();

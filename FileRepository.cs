@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace assignment2
 {
-    // Interface for task operations to promote low coupling
+    // Interface for task operations
     public interface ITaskRepository
     {
         void SaveTask(string title, string description, string status, string assignedUser, string history, string dueDate, bool isHighPriority, string editingTaskTitle = null);
@@ -23,7 +23,7 @@ namespace assignment2
         string GetUserRole(string username);
     }
 
-    // Concrete implementation using file storage
+    // file storage
     public class FileRepository : ITaskRepository, IUserRepository
     {
         private readonly string taskFile = "tasks.txt";

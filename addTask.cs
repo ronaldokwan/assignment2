@@ -24,7 +24,7 @@ namespace assignment2
             if (editingTaskTitle != null) LoadTaskData();
         }
 
-        // Overloaded constructor for polymorphism (default repositories)
+        // Overloaded constructor for polymorphism
         public AddTask(string user, string taskTitleToEdit = null) : this(user, new FileRepository(), new FileRepository(), taskTitleToEdit)
         {
         }

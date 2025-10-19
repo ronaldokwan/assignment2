@@ -25,7 +25,6 @@ namespace assignment2
         {
             listBox.Items.Clear();
             var tasks = taskRepository.LoadTasks();
-            // Use Dictionary for better structure
             var taskDict = new Dictionary<string, string[]>();
             foreach (var line in tasks)
             {
@@ -45,7 +44,7 @@ namespace assignment2
             }
             else
             {
-                // Default: Sort by due date
+                // Default sort by due date
                 sortedTasks = taskDict.OrderBy(t => DateTime.Parse(t.Value[5])).ToList();
             }
 
@@ -98,14 +97,12 @@ namespace assignment2
         protected override void LoadTasks(ListBox listBox, string sortMode = "dueDate")
         {
             base.LoadTasks(listBox, sortMode);
-            // Additional custom logic, e.g., highlight overdue tasks
             for (int i = 0; i < listBox.Items.Count; i++)
             {
                 var item = listBox.Items[i].ToString();
                 var parts = item.Split('|');
                 if (parts.Length >= 5 && DateTime.Parse(parts[4].Trim().Substring(5)) < DateTime.Today)
                 {
-                    // For simplicity, just append note (real app could use custom draw)
                     listBox.Items[i] = item + " (Overdue)";
                 }
             }
