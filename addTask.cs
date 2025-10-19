@@ -29,16 +29,21 @@ namespace assignment2
             {
                 if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line)) continue;
                 var parts = line.Split('|');
-                comboBoxAssignUser.Items.Add(parts[0]);
+                if (parts.Length >= 1)
+                    comboBoxAssignUser.Items.Add(parts[0]);
             }
         }
 
         private void LoadTaskData()
         {
-            var lines = File.ReadAllLines(taskFile);
-            var taskLine = lines.FirstOrDefault(l => l.Split('|')[0] == editingTaskTitle);
+            if (!File.Exists(taskFile)) return;
+            var taskLine = File.ReadAllLines(taskFile)
+                               .FirstOrDefault(l => l.Split('|')[0] == editingTaskTitle);
+
             if (taskLine == null) return;
             var parts = taskLine.Split('|');
+            if (parts.Length < 4) return;
+
             taskTitle.Text = parts[0];
             taskDescription.Text = parts[1];
             comboBoxAssignUser.SelectedItem = parts[3];
@@ -53,28 +58,33 @@ namespace assignment2
 
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(assignedUser))
             {
-                MessageBox.Show("Fill all fields", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill all fields.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (!File.Exists(taskFile)) File.WriteAllText(taskFile, "");
+            if (!File.Exists(taskFile)) File.WriteAllText(taskFile, string.Empty);
 
             var lines = File.ReadAllLines(taskFile).ToList();
+            bool updated = false;
 
             if (editingTaskTitle != null)
             {
                 for (int i = 0; i < lines.Count; i++)
                 {
-                    if (lines[i].Split('|')[0] == editingTaskTitle)
+                    var parts = lines[i].Split('|');
+                    if (parts.Length >= 4 && parts[0] == editingTaskTitle)
                     {
-                        lines[i] = $"{title}|{description}|{status}|{assignedUser}";
+                        string oldHistory = parts.Length >= 5 ? parts[4] : "";
+                        lines[i] = $"{title}|{description}|{status}|{assignedUser}|{oldHistory}";
+                        updated = true;
                         break;
                     }
                 }
             }
-            else
+
+            if (!updated)
             {
-                lines.Add($"{title}|{description}|{status}|{assignedUser}");
+                lines.Add($"{title}|{description}|{status}|{assignedUser}|");
             }
 
             File.WriteAllLines(taskFile, lines);

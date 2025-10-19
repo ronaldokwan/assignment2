@@ -37,6 +37,7 @@ namespace assignment2
                         new Admin(username).Show();
                     else
                         new TaskList(username).Show();
+
                     Hide();
                     return;
                 }

@@ -57,7 +57,7 @@ namespace assignment2
 
         private void manageTasksButton_Click(object sender, EventArgs e)
         {
-            new TaskList(currentAdmin).Show();
+            new TaskList(currentAdmin).ShowDialog();
         }
 
         private void signOutButton_Click(object sender, EventArgs e)

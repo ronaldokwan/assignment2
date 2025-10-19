@@ -20,22 +20,20 @@ namespace assignment2
 
         private bool IsAdmin()
         {
+            if (!File.Exists("database.txt")) return false;
             var userLine = File.ReadAllLines("database.txt")
                 .FirstOrDefault(l => l.Split('|')[0] == currentUser);
-            return userLine != null && userLine.Split('|')[2] == "admin";
+            return userLine != null && userLine.Split('|').Length >= 3 && userLine.Split('|')[2] == "admin";
         }
 
         private void ConfigureButtons()
         {
             bool isAdmin = IsAdmin();
 
-            // Admin: show Add/Edit/Delete, hide Mark as Done & Sign Out
             addTaskButton.Visible = isAdmin;
             editTaskButton.Visible = isAdmin;
             deleteTaskButton.Visible = isAdmin;
             markAsDoneButton.Visible = !isAdmin;
-
-            // Sign Out only for normal users
             signOutButton.Visible = !isAdmin;
         }
 
@@ -47,13 +45,23 @@ namespace assignment2
             foreach (var line in File.ReadAllLines(taskFile))
             {
                 var parts = line.Split('|');
-                string assignedUser = parts[3];
+                if (parts.Length < 4) continue;
+
+                string title = parts[0];
+                string description = parts[1];
                 string status = parts[2];
+                string assignedUser = parts[3];
+
                 if (assignedUser == currentUser || IsAdmin())
                 {
-                    listBoxTasks.Items.Add($"(Title: {parts[0]} - Description: {parts[1]}) ({assignedUser}) - {status}");
+                    listBoxTasks.Items.Add($"{title} | {description} | {assignedUser} | {status}");
                 }
             }
+        }
+
+        private string ExtractTitle(string taskItem)
+        {
+            return taskItem.Split('|')[0].Trim();
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
@@ -65,7 +73,7 @@ namespace assignment2
         private void editTaskButton_Click(object sender, EventArgs e)
         {
             if (listBoxTasks.SelectedItem == null) return;
-            string title = listBoxTasks.SelectedItem.ToString().Split('(')[0].Trim();
+            string title = ExtractTitle(listBoxTasks.SelectedItem.ToString());
             new AddTask(currentUser, title).ShowDialog();
             LoadTasks();
         }
@@ -73,8 +81,9 @@ namespace assignment2
         private void deleteTaskButton_Click(object sender, EventArgs e)
         {
             if (listBoxTasks.SelectedItem == null) return;
-            string title = listBoxTasks.SelectedItem.ToString().Split('(')[0].Trim();
-            var lines = File.ReadAllLines(taskFile).Where(l => !l.StartsWith(title + "|")).ToArray();
+            string title = ExtractTitle(listBoxTasks.SelectedItem.ToString());
+            var lines = File.ReadAllLines(taskFile)
+                .Where(l => !l.StartsWith(title + "|")).ToArray();
             File.WriteAllLines(taskFile, lines);
             MessageBox.Show("Task deleted!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadTasks();
@@ -83,10 +92,16 @@ namespace assignment2
         private void viewHistoryButton_Click(object sender, EventArgs e)
         {
             if (listBoxTasks.SelectedItem == null) return;
-            string title = listBoxTasks.SelectedItem.ToString().Split('(')[0].Trim();
-            var taskLine = File.ReadAllLines(taskFile).FirstOrDefault(l => l.Split('|')[0] == title);
+            string title = ExtractTitle(listBoxTasks.SelectedItem.ToString());
+            var taskLine = File.ReadAllLines(taskFile)
+                .FirstOrDefault(l => l.Split('|')[0] == title);
             if (taskLine == null) return;
-            var history = taskLine.Split('|').Length >= 5 ? taskLine.Split('|')[4].Replace(";", Environment.NewLine) : "No history";
+
+            var parts = taskLine.Split('|');
+            string history = parts.Length >= 5 && !string.IsNullOrWhiteSpace(parts[4])
+                ? parts[4].Replace(";", Environment.NewLine)
+                : "No history yet.";
+
             MessageBox.Show(history, $"History of {title}", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
@@ -94,12 +109,14 @@ namespace assignment2
         {
             if (listBoxTasks.SelectedItem == null) return;
 
-            string title = listBoxTasks.SelectedItem.ToString().Split('(')[0].Trim();
+            string title = ExtractTitle(listBoxTasks.SelectedItem.ToString());
             var lines = File.ReadAllLines(taskFile);
 
             for (int i = 0; i < lines.Length; i++)
             {
                 var parts = lines[i].Split('|');
+                if (parts.Length < 4) continue;
+
                 if (parts[0] == title)
                 {
                     string assignedUser = parts[3];
@@ -117,6 +134,7 @@ namespace assignment2
             }
 
             File.WriteAllLines(taskFile, lines);
+            MessageBox.Show("Task marked as done.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadTasks();
         }
 

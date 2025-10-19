@@ -14,8 +14,18 @@ namespace assignment2
 
         private void LoadArchive()
         {
-            if (!File.Exists("archive.txt")) return;
-            listBoxArchive.Items.AddRange(File.ReadAllLines("archive.txt"));
+            listBoxArchive.Items.Clear();
+            if (!File.Exists("archive.txt"))
+            {
+                listBoxArchive.Items.Add("No archived tasks yet.");
+                return;
+            }
+
+            var lines = File.ReadAllLines("archive.txt");
+            if (lines.Length == 0)
+                listBoxArchive.Items.Add("No archived tasks yet.");
+            else
+                listBoxArchive.Items.AddRange(lines);
         }
     }
 }
