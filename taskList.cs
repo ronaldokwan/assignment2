@@ -29,7 +29,7 @@ namespace assignment2
             foreach (var line in tasks)
             {
                 var parts = line.Split('|');
-                if (parts.Length < 4) continue;
+                if (parts.Length < 7) continue;
                 taskDict[parts[0]] = parts;
             }
 
