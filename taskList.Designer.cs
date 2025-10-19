@@ -11,6 +11,7 @@
         private Button viewHistoryButton;
         private Button markAsDoneButton;
         private Button signOutButton;
+        private Button sortByPriorityButton;
 
         protected override void Dispose(bool disposing)
         {
@@ -28,6 +29,7 @@
             viewHistoryButton = new Button();
             markAsDoneButton = new Button();
             signOutButton = new Button();
+            sortByPriorityButton = new Button();
             SuspendLayout();
             // ================================
             // FORM SETTINGS
@@ -108,6 +110,17 @@
             markAsDoneButton.FlatStyle = FlatStyle.Flat;
             markAsDoneButton.Click += markAsDoneButton_Click;
             // ================================
+            // BUTTON: SORT BY PRIORITY
+            // ================================
+            sortByPriorityButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            sortByPriorityButton.Text = "Sort by Priority";
+            sortByPriorityButton.Location = new Point(230, 500);
+            sortByPriorityButton.Size = new Size(150, 45);
+            sortByPriorityButton.BackColor = Color.FromArgb(153, 51, 255);
+            sortByPriorityButton.ForeColor = Color.White;
+            sortByPriorityButton.FlatStyle = FlatStyle.Flat;
+            sortByPriorityButton.Click += sortByPriorityButton_Click;
+            // ================================
             // BUTTON: SIGN OUT
             // ================================
             signOutButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
@@ -128,6 +141,7 @@
             Controls.Add(deleteTaskButton);
             Controls.Add(viewHistoryButton);
             Controls.Add(markAsDoneButton);
+            Controls.Add(sortByPriorityButton);
             Controls.Add(signOutButton);
             ResumeLayout(false);
             PerformLayout();
