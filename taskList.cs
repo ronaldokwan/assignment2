@@ -115,7 +115,6 @@ namespace assignment2
         {
             bool isAdmin = IsAdmin();
             addTaskButton.Visible = isAdmin;
-            editTaskButton.Visible = isAdmin;
             deleteTaskButton.Visible = isAdmin;
             markAsDoneButton.Visible = !isAdmin;
             signOutButton.Visible = !isAdmin;
@@ -124,14 +123,6 @@ namespace assignment2
         private void addTaskButton_Click(object sender, EventArgs e)
         {
             new AddTask(currentUser, taskRepository, userRepository).ShowDialog();
-            LoadTasks(listBoxTasks, sortMode);
-        }
-
-        private void editTaskButton_Click(object sender, EventArgs e)
-        {
-            if (listBoxTasks.SelectedItem == null) return;
-            string title = ExtractTitle(listBoxTasks.SelectedItem.ToString());
-            new AddTask(currentUser, taskRepository, userRepository, title).ShowDialog();
             LoadTasks(listBoxTasks, sortMode);
         }
 

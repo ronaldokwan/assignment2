@@ -12,7 +12,7 @@ This is a simple **Windows Forms (WinForms) Task Management System** in C#. It a
 
 * Can **create new users** (admin or regular users).
 * Can **assign tasks** to users.
-* Can **edit or delete any task**.
+* Can **delete any task**.
 * Can **view all users and their tasks**.
 * Can **sign out** and return to the login screen.
 
@@ -46,7 +46,7 @@ This is a simple **Windows Forms (WinForms) Task Management System** in C#. It a
 | `LogInScreen.cs`      | Login screen for authentication.                |
 | `Admin.cs`            | Admin panel for user management and task access.|
 | `TaskList.cs`         | Task list view with actions (inherits from `BaseTaskForm`). |
-| `AddTask.cs`          | Form for adding/editing tasks.                  |
+| `AddTask.cs`          | Form for adding tasks.                  |
 | `FileRepository.cs`   | Implements repositories for tasks and users (includes interfaces). |
 | `TaskRepositoryTests.cs` | NUnit tests for task repository.             |
 | `database.txt`        | Stores users in format: `Username|Password|Role`. |

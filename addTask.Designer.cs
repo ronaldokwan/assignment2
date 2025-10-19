@@ -40,7 +40,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(900, 600);
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "Add / Edit Task";
+            Text = "Add Task";
             BackColor = System.Drawing.Color.WhiteSmoke;
             // ================================
             // LABEL: TASK TITLE

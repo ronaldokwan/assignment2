@@ -6,7 +6,6 @@
         private ListBox listBoxTasks;
         private Label labelTasks;
         private Button addTaskButton;
-        private Button editTaskButton;
         private Button deleteTaskButton;
         private Button viewHistoryButton;
         private Button markAsDoneButton;
@@ -24,7 +23,6 @@
             listBoxTasks = new ListBox();
             labelTasks = new Label();
             addTaskButton = new Button();
-            editTaskButton = new Button();
             deleteTaskButton = new Button();
             viewHistoryButton = new Button();
             markAsDoneButton = new Button();
@@ -66,22 +64,11 @@
             addTaskButton.FlatStyle = FlatStyle.Flat;
             addTaskButton.Click += addTaskButton_Click;
             // ================================
-            // BUTTON: EDIT TASK
-            // ================================
-            editTaskButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
-            editTaskButton.Text = "Edit Task";
-            editTaskButton.Location = new Point(230, 440);
-            editTaskButton.Size = new Size(150, 45);
-            editTaskButton.BackColor = Color.FromArgb(255, 204, 0);
-            editTaskButton.ForeColor = Color.White;
-            editTaskButton.FlatStyle = FlatStyle.Flat;
-            editTaskButton.Click += editTaskButton_Click;
-            // ================================
             // BUTTON: DELETE TASK
             // ================================
             deleteTaskButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             deleteTaskButton.Text = "Delete Task";
-            deleteTaskButton.Location = new Point(410, 440);
+            deleteTaskButton.Location = new Point(230, 440);
             deleteTaskButton.Size = new Size(150, 45);
             deleteTaskButton.BackColor = Color.FromArgb(255, 77, 77);
             deleteTaskButton.ForeColor = Color.White;
@@ -92,7 +79,7 @@
             // ================================
             viewHistoryButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             viewHistoryButton.Text = "View History";
-            viewHistoryButton.Location = new Point(590, 440);
+            viewHistoryButton.Location = new Point(410, 440);
             viewHistoryButton.Size = new Size(150, 45);
             viewHistoryButton.BackColor = Color.FromArgb(102, 102, 255);
             viewHistoryButton.ForeColor = Color.White;
@@ -137,7 +124,6 @@
             Controls.Add(labelTasks);
             Controls.Add(listBoxTasks);
             Controls.Add(addTaskButton);
-            Controls.Add(editTaskButton);
             Controls.Add(deleteTaskButton);
             Controls.Add(viewHistoryButton);
             Controls.Add(markAsDoneButton);
