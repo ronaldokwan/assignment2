@@ -29,7 +29,6 @@
             markAsDoneButton = new Button();
             signOutButton = new Button();
             SuspendLayout();
-
             // ================================
             // FORM SETTINGS
             // ================================
@@ -39,7 +38,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Task List";
             BackColor = System.Drawing.Color.WhiteSmoke;
-
             // ================================
             // LABEL: TASKS
             // ================================
@@ -47,14 +45,13 @@
             labelTasks.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
             labelTasks.Location = new Point(50, 30);
             labelTasks.Text = "Your Tasks:";
-
             // ================================
             // LISTBOX: TASKS
             // ================================
             listBoxTasks.Font = new Font("Segoe UI", 11F);
             listBoxTasks.Location = new Point(50, 70);
-            listBoxTasks.Size = new Size(700, 350);
-
+            listBoxTasks.Size = new Size(800, 350);
+            listBoxTasks.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             // ================================
             // BUTTON: ADD TASK
             // ================================
@@ -66,7 +63,6 @@
             addTaskButton.ForeColor = Color.White;
             addTaskButton.FlatStyle = FlatStyle.Flat;
             addTaskButton.Click += addTaskButton_Click;
-
             // ================================
             // BUTTON: EDIT TASK
             // ================================
@@ -78,7 +74,6 @@
             editTaskButton.ForeColor = Color.White;
             editTaskButton.FlatStyle = FlatStyle.Flat;
             editTaskButton.Click += editTaskButton_Click;
-
             // ================================
             // BUTTON: DELETE TASK
             // ================================
@@ -90,7 +85,6 @@
             deleteTaskButton.ForeColor = Color.White;
             deleteTaskButton.FlatStyle = FlatStyle.Flat;
             deleteTaskButton.Click += deleteTaskButton_Click;
-
             // ================================
             // BUTTON: VIEW HISTORY
             // ================================
@@ -102,7 +96,6 @@
             viewHistoryButton.ForeColor = Color.White;
             viewHistoryButton.FlatStyle = FlatStyle.Flat;
             viewHistoryButton.Click += viewHistoryButton_Click;
-
             // ================================
             // BUTTON: MARK AS DONE
             // ================================
@@ -114,7 +107,6 @@
             markAsDoneButton.ForeColor = Color.White;
             markAsDoneButton.FlatStyle = FlatStyle.Flat;
             markAsDoneButton.Click += markAsDoneButton_Click;
-
             // ================================
             // BUTTON: SIGN OUT
             // ================================
@@ -126,7 +118,6 @@
             signOutButton.ForeColor = Color.White;
             signOutButton.FlatStyle = FlatStyle.Flat;
             signOutButton.Click += signOutButton_Click;
-
             // ================================
             // ADD CONTROLS
             // ================================
@@ -138,7 +129,6 @@
             Controls.Add(viewHistoryButton);
             Controls.Add(markAsDoneButton);
             Controls.Add(signOutButton);
-
             ResumeLayout(false);
             PerformLayout();
         }

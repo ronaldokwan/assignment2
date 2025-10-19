@@ -8,53 +8,64 @@ namespace assignment2
     public partial class AddTask : Form
     {
         private readonly string currentUser;
-        private readonly string taskFile = "tasks.txt";
         private readonly string editingTaskTitle;
+        private readonly ITaskRepository taskRepository;
+        private readonly IUserRepository userRepository;
 
-        public AddTask(string user, string taskTitleToEdit = null)
+        // Constructor with dependency injection for repositories
+        public AddTask(string user, ITaskRepository taskRepo, IUserRepository userRepo, string taskTitleToEdit = null)
         {
             InitializeComponent();
             currentUser = user;
             editingTaskTitle = taskTitleToEdit;
+            taskRepository = taskRepo;
+            userRepository = userRepo;
             LoadUsers();
             if (editingTaskTitle != null) LoadTaskData();
         }
 
+        // Overloaded constructor for polymorphism (default repositories)
+        public AddTask(string user, string taskTitleToEdit = null) : this(user, new FileRepository(), new FileRepository(), taskTitleToEdit)
+        {
+        }
+
+        // Load users from repository
         private void LoadUsers()
         {
             comboBoxAssignUser.Items.Clear();
-            if (!File.Exists("database.txt")) return;
-
-            foreach (var line in File.ReadAllLines("database.txt"))
+            foreach (var line in userRepository.LoadUsers())
             {
-                if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line)) continue;
                 var parts = line.Split('|');
                 if (parts.Length >= 1)
                     comboBoxAssignUser.Items.Add(parts[0]);
             }
         }
 
+        // Load existing task data for editing
         private void LoadTaskData()
         {
-            if (!File.Exists(taskFile)) return;
-            var taskLine = File.ReadAllLines(taskFile)
+            var taskLine = taskRepository.LoadTasks()
                                .FirstOrDefault(l => l.Split('|')[0] == editingTaskTitle);
-
             if (taskLine == null) return;
             var parts = taskLine.Split('|');
             if (parts.Length < 4) return;
-
             taskTitle.Text = parts[0];
             taskDescription.Text = parts[1];
             comboBoxAssignUser.SelectedItem = parts[3];
+            if (parts.Length >= 6) dueDatePicker.Value = DateTime.Parse(parts[5]);
+            if (parts.Length >= 7) checkBoxHighPriority.Checked = parts[6] == "High";
         }
 
+        // Event handler for saving task
         private void saveTaskButton_Click(object sender, EventArgs e)
         {
             string title = taskTitle.Text.Trim();
             string description = taskDescription.Text.Trim();
             string status = "ToDo";
             string assignedUser = comboBoxAssignUser.SelectedItem?.ToString();
+            string history = editingTaskTitle != null ? taskRepository.GetTaskHistory(editingTaskTitle) : "";
+            string dueDate = dueDatePicker.Value.ToString("yyyy-MM-dd");
+            bool isHighPriority = checkBoxHighPriority.Checked;
 
             if (string.IsNullOrEmpty(title) || string.IsNullOrEmpty(description) || string.IsNullOrEmpty(assignedUser))
             {
@@ -62,34 +73,23 @@ namespace assignment2
                 return;
             }
 
-            if (!File.Exists(taskFile)) File.WriteAllText(taskFile, string.Empty);
-
-            var lines = File.ReadAllLines(taskFile).ToList();
-            bool updated = false;
-
-            if (editingTaskTitle != null)
+            // Additional validation: Title length
+            if (title.Length > 50)
             {
-                for (int i = 0; i < lines.Count; i++)
-                {
-                    var parts = lines[i].Split('|');
-                    if (parts.Length >= 4 && parts[0] == editingTaskTitle)
-                    {
-                        string oldHistory = parts.Length >= 5 ? parts[4] : "";
-                        lines[i] = $"{title}|{description}|{status}|{assignedUser}|{oldHistory}";
-                        updated = true;
-                        break;
-                    }
-                }
+                MessageBox.Show("Title must be under 50 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
 
-            if (!updated)
+            try
             {
-                lines.Add($"{title}|{description}|{status}|{assignedUser}|");
+                taskRepository.SaveTask(title, description, status, assignedUser, history, dueDate, isHighPriority, editingTaskTitle);
+                MessageBox.Show("Task saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Close();
             }
-
-            File.WriteAllLines(taskFile, lines);
-            MessageBox.Show("Task saved successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            Close();
+            catch (InvalidOperationException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

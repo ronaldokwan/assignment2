@@ -12,9 +12,7 @@ namespace assignment2
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
             SeedAdmin();
-
             Application.Run(new LogInScreen());
         }
 
@@ -22,7 +20,6 @@ namespace assignment2
         private static void SeedAdmin()
         {
             string filePath = "database.txt";
-
             if (!File.Exists(filePath) || File.ReadAllLines(filePath).All(l => string.IsNullOrWhiteSpace(l)))
             {
                 File.WriteAllText(filePath, "admin|admin123|admin" + Environment.NewLine);

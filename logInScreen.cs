@@ -7,43 +7,47 @@ namespace assignment2
 {
     public partial class LogInScreen : Form
     {
-        public LogInScreen()
+        private readonly IUserRepository userRepository;
+
+        // Constructor with DI
+        public LogInScreen(IUserRepository userRepo)
         {
             InitializeComponent();
+            userRepository = userRepo;
         }
 
+        // Overloaded default constructor
+        public LogInScreen() : this(new FileRepository())
+        {
+        }
+
+        // Event handler for login
         private void logIn_Click(object sender, EventArgs e)
         {
             string username = usernameField.Text.Trim();
             string password = passwordField.Text.Trim();
 
-            if (!File.Exists("database.txt"))
+            try
             {
-                MessageBox.Show("No user database found!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            foreach (var line in File.ReadAllLines("database.txt"))
-            {
-                if (line.StartsWith("#") || string.IsNullOrWhiteSpace(line)) continue;
-
-                var parts = line.Split('|');
-                if (parts.Length < 3) continue;
-
-                if (parts[0] == username && parts[1] == password)
+                var users = userRepository.LoadUsers();
+                var userLine = users.FirstOrDefault(l => l.Split('|')[0] == username && l.Split('|')[1] == password);
+                if (userLine == null)
                 {
-                    string role = parts[2];
-                    if (role == "admin")
-                        new Admin(username).Show();
-                    else
-                        new TaskList(username).Show();
-
-                    Hide();
+                    MessageBox.Show("Invalid credentials.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-            }
 
-            MessageBox.Show("Invalid credentials.", "Login Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                string role = userLine.Split('|')[2];
+                if (role == "admin")
+                    new Admin(username).Show();
+                else
+                    new TaskList(username).Show();
+                Hide();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error during login: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
