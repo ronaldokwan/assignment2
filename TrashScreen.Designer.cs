@@ -1,16 +1,15 @@
-﻿namespace assignment2
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace assignment2
 {
     partial class TrashScreen
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private ListBox listBoxTrash;
+        private Label labelTrash;
+        private Button closeButton;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,36 +21,57 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             listBoxTrash = new ListBox();
+            labelTrash = new Label();
+            closeButton = new Button();
             SuspendLayout();
-            // 
-            // listBoxTrash
-            // 
-            listBoxTrash.FormattingEnabled = true;
-            listBoxTrash.Location = new Point(176, 27);
-            listBoxTrash.Name = "listBoxTrash";
-            listBoxTrash.Size = new Size(443, 244);
-            listBoxTrash.TabIndex = 0;
-            // 
-            // TrashScreen
-            // 
+            // ================================
+            // FORM SETTINGS
+            // ================================
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(900, 600);
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Trash Bin";
+            BackColor = Color.WhiteSmoke;
+            // ================================
+            // LABEL: TRASH TITLE
+            // ================================
+            labelTrash.AutoSize = true;
+            labelTrash.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            labelTrash.Location = new Point(50, 30);
+            labelTrash.Text = "Deleted Tasks:";
+            // ================================
+            // LISTBOX: TRASH
+            // ================================
+            listBoxTrash.Font = new Font("Segoe UI", 11F);
+            listBoxTrash.Location = new Point(50, 80);
+            listBoxTrash.Size = new Size(800, 400);
+            listBoxTrash.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+            listBoxTrash.BorderStyle = BorderStyle.FixedSingle;
+            // ================================
+            // BUTTON: CLOSE
+            // ================================
+            closeButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            closeButton.Text = "Close";
+            closeButton.Location = new Point(700, 500);
+            closeButton.Size = new Size(150, 45);
+            closeButton.BackColor = Color.Gray;
+            closeButton.ForeColor = Color.White;
+            closeButton.FlatStyle = FlatStyle.Flat;
+            closeButton.Click += (sender, e) => Close();
+            // ================================
+            // ADD CONTROLS
+            // ================================
+            Controls.Add(labelTrash);
             Controls.Add(listBoxTrash);
-            Name = "TrashScreen";
-            Text = "Trash";
+            Controls.Add(closeButton);
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
-        private ListBox listBoxTrash;
     }
 }

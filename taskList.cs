@@ -115,7 +115,8 @@ namespace assignment2
             deleteTaskButton.Visible = isAdmin;
             markAsDoneButton.Visible = !isAdmin;
             signOutButton.Visible = !isAdmin;
-            viewTrashButton.Visible = true;
+            viewTrashButton.Visible = isAdmin;
+            closeButton.Visible = isAdmin;
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
