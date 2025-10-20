@@ -11,6 +11,7 @@
         private Button markAsDoneButton;
         private Button signOutButton;
         private Button sortByPriorityButton;
+        private Button viewTrashButton;
 
         protected override void Dispose(bool disposing)
         {
@@ -28,6 +29,7 @@
             markAsDoneButton = new Button();
             signOutButton = new Button();
             sortByPriorityButton = new Button();
+            viewTrashButton = new Button();
             SuspendLayout();
             // ================================
             // FORM SETTINGS
@@ -119,6 +121,17 @@
             signOutButton.FlatStyle = FlatStyle.Flat;
             signOutButton.Click += signOutButton_Click;
             // ================================
+            // BUTTON: VIEW TRASH
+            // ================================
+            viewTrashButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            viewTrashButton.Text = "View Trash";
+            viewTrashButton.Location = new Point(410, 500);
+            viewTrashButton.Size = new Size(150, 45);
+            viewTrashButton.BackColor = Color.FromArgb(255, 153, 0);
+            viewTrashButton.ForeColor = Color.White;
+            viewTrashButton.FlatStyle = FlatStyle.Flat;
+            viewTrashButton.Click += viewTrashButton_Click;
+            // ================================
             // ADD CONTROLS
             // ================================
             Controls.Add(labelTasks);
@@ -129,6 +142,7 @@
             Controls.Add(markAsDoneButton);
             Controls.Add(sortByPriorityButton);
             Controls.Add(signOutButton);
+            Controls.Add(viewTrashButton);
             ResumeLayout(false);
             PerformLayout();
         }

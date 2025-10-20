@@ -115,6 +115,7 @@ namespace assignment2
             deleteTaskButton.Visible = isAdmin;
             markAsDoneButton.Visible = !isAdmin;
             signOutButton.Visible = !isAdmin;
+            viewTrashButton.Visible = true;
         }
 
         private void addTaskButton_Click(object sender, EventArgs e)
@@ -156,6 +157,12 @@ namespace assignment2
             string historyEntry = $"{DateTime.Now}: Marked as Done by {currentUser}";
             taskRepository.UpdateTaskStatus(title, "Done", currentUser, historyEntry);
             MessageBox.Show("Task marked as done.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadTasks(listBoxTasks, sortMode);
+        }
+
+        private void viewTrashButton_Click(object sender, EventArgs e)
+        {
+            new TrashScreen().ShowDialog();
             LoadTasks(listBoxTasks, sortMode);
         }
 
