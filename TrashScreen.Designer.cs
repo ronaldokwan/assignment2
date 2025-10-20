@@ -63,8 +63,21 @@ namespace assignment2
             closeButton.FlatStyle = FlatStyle.Flat;
             closeButton.Click += (sender, e) => Close();
             // ================================
+            // BUTTON: CLEAR ALL TRASH
+            // ================================
+            clearTrashButton = new Button();
+            clearTrashButton.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
+            clearTrashButton.Text = "Clear All Trash";
+            clearTrashButton.Location = new Point(500, 500);
+            clearTrashButton.Size = new Size(180, 45);
+            clearTrashButton.BackColor = Color.Red;
+            clearTrashButton.ForeColor = Color.White;
+            clearTrashButton.FlatStyle = FlatStyle.Flat;
+            clearTrashButton.Click += clearTrashButton_Click;
+            // ================================
             // ADD CONTROLS
             // ================================
+            Controls.Add(clearTrashButton);
             Controls.Add(labelTrash);
             Controls.Add(listBoxTrash);
             Controls.Add(closeButton);

@@ -13,6 +13,7 @@ This is a simple **Windows Forms (WinForms) Task Management System** in C#. It a
 * Can **create new users** (admin or regular users).
 * Can **assign tasks** to users.
 * Can **delete any task**.
+* Can **view deleted tasks** in the trash.
 * Can **view all users and their tasks**.
 * Can **sign out** and return to the login screen.
 
@@ -51,6 +52,7 @@ This is a simple **Windows Forms (WinForms) Task Management System** in C#. It a
 | `TaskRepositoryTests.cs` | NUnit tests for task repository.             |
 | `database.txt`        | Stores users in format: `Username|Password|Role`. |
 | `tasks.txt`           | Stores tasks in format: `Title|Description|Status|AssignedUser|History|DueDate|Priority`. |
+| `trash.txt`           | Stores deleted tasks in the same format as `tasks.txt`. |
 
 ---
 
@@ -64,5 +66,3 @@ This is a simple **Windows Forms (WinForms) Task Management System** in C#. It a
 6. Users can log in, view, and update their tasks.
 
 ---
-
-
