@@ -13,6 +13,9 @@ namespace assignment2
         string GetTaskHistory(string title);
         void DeleteTask(string title);
         void UpdateTaskStatus(string title, string newStatus, string updatedBy, string newHistoryEntry);
+
+        // Read deleted tasks for trash functionality
+        string[] LoadDeletedTasks();
     }
 
     // Interface for user operations
@@ -28,6 +31,7 @@ namespace assignment2
     {
         private readonly string taskFile = "tasks.txt";
         private readonly string userFile = "database.txt";
+        private readonly string trashFile = "trash.txt";
 
         // IUserRepository implementation
         public void CreateUser(string username, string password, string role)
@@ -117,8 +121,23 @@ namespace assignment2
         {
             try
             {
-                var lines = LoadTasks().Where(l => !l.StartsWith(title + "|")).ToArray();
-                File.WriteAllLines(taskFile, lines);
+                var lines = LoadTasks().ToList();
+                // find tasks to delete (matching title)
+                var toDelete = lines.Where(l =>
+                {
+                    var parts = l.Split('|');
+                    return parts.Length > 0 && parts[0] == title;
+                }).ToList();
+
+                // Remaining tasks = all minus the deleted ones
+                var remaining = lines.Except(toDelete).ToArray();
+
+                // Write remaining tasks back to tasks file
+                File.WriteAllLines(taskFile, remaining);
+
+                // Ensure trash file exists and append deleted lines
+                if (!File.Exists(trashFile)) File.WriteAllText(trashFile, string.Empty);
+                File.AppendAllLines(trashFile, toDelete);
             }
             catch (Exception ex)
             {
@@ -149,6 +168,14 @@ namespace assignment2
             {
                 MessageBox.Show($"Error updating task: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        public string[] LoadDeletedTasks()
+        {
+            if (!File.Exists(trashFile)) return new string[0];
+            return File.ReadAllLines(trashFile)
+                       .Where(l => !string.IsNullOrWhiteSpace(l))
+                       .ToArray();
         }
     }
 }

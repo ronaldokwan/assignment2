@@ -28,18 +28,30 @@
         /// </summary>
         private void InitializeComponent()
         {
+            listBoxTrash = new ListBox();
             SuspendLayout();
+            // 
+            // listBoxTrash
+            // 
+            listBoxTrash.FormattingEnabled = true;
+            listBoxTrash.Location = new Point(176, 27);
+            listBoxTrash.Name = "listBoxTrash";
+            listBoxTrash.Size = new Size(443, 244);
+            listBoxTrash.TabIndex = 0;
             // 
             // TrashScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(listBoxTrash);
             Name = "TrashScreen";
             Text = "Trash";
             ResumeLayout(false);
         }
 
         #endregion
+
+        private ListBox listBoxTrash;
     }
 }

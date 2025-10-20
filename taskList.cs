@@ -162,7 +162,10 @@ namespace assignment2
 
         private void viewTrashButton_Click(object sender, EventArgs e)
         {
-            new TrashScreen().ShowDialog();
+            using (var trashForm = new TrashScreen(taskRepository))
+            {
+                trashForm.ShowDialog(this);
+            }
             LoadTasks(listBoxTasks, sortMode);
         }
 
